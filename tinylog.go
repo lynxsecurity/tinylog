@@ -23,7 +23,7 @@ func New() *Tiny {
 	})
 	return &Tiny{l}
 }
-func (t *Tiny) NewError(e error, message string) {
+func (t *Tiny) NewError(message string) {
 	t.WithFields(logrus.Fields{"host": os.Getenv("HOSTNAME")}).Warn(message)
 }
 func (t *Tiny) Ready(message string) {
