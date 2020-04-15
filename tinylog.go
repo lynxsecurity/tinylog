@@ -1,6 +1,7 @@
 package tinylog
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -26,8 +27,8 @@ func New() *Tiny {
 func (t *Tiny) NewWarning(message string) {
 	t.WithFields(logrus.Fields{"host": os.Getenv("HOSTNAME")}).Warn(message)
 }
-func (t *Tiny) Ready(message string) {
-	t.WithFields(logrus.Fields{"host": os.Getenv("HOSTNAME"), "pid": os.Getpid()}).Info(message)
+func (t *Tiny) ConsumerReady() {
+	t.WithFields(logrus.Fields{"host": os.Getenv("HOSTNAME")}).Info(fmt.Sprintf("Consumer ready, PID: %d", os.Getpid()))
 }
 func (t *Tiny) Info(message string) {
 	t.WithFields(logrus.Fields{"host": os.Getenv("HOSTNAME")}).Info(message)
