@@ -13,10 +13,10 @@ type Tiny struct {
 	*logrus.Logger
 }
 
-func New() *Tiny {
+func New(output *os.File) *Tiny {
 	l := logrus.New()
 	l.SetLevel(logrus.DebugLevel)
-	log.SetOutput(os.Stdout)
+	log.SetOutput(output)
 	l.SetFormatter(&f.Formatter{
 		NoColors:    false,
 		HideKeys:    true,
