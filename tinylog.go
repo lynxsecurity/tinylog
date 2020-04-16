@@ -13,12 +13,18 @@ type Tiny struct {
 	*logrus.Logger
 }
 
-func New(output *os.File) *Tiny {
+// New takes an os.File and creates a new instance of log
+// optional params: NoColor, when set to true, output will not be colorized.
+func New(output *os.File, NoColors ...bool) *Tiny {
+	nocolors := false
+	if len(NoColors) > 0 {
+		nocolors = NoColors[0]
+	}
 	l := logrus.New()
 	l.SetLevel(logrus.DebugLevel)
 	log.SetOutput(output)
 	l.SetFormatter(&f.Formatter{
-		NoColors:    false,
+		NoColors:    nocolors,
 		HideKeys:    true,
 		FieldsOrder: []string{"component", "category"},
 	})
